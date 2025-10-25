@@ -22,16 +22,12 @@ describe('📘 Testes de Cadastro de Livro com Autenticação', () => {
       // Login
       const loginResponse = await request(app).post('/api/auth/login').send(testUser);
 
-    // DEBUG: exibir corpo retornado pelo login para diagnóstico
-   // console.log('\n[DEBUG] loginResponse.status =', loginResponse.status);
-    //console.log('\n[DEBUG] loginResponse.body =', JSON.stringify(loginResponse.body));
+  
 
     expect(loginResponse.status).to.equal(200);
     expect(loginResponse.body).to.have.property('token');
     token = loginResponse.body.token;
-    // DEBUG: exibir token e cabeçalho que será enviado
-    //console.log('\n[DEBUG] token =', token);
-   // console.log('\n[DEBUG] Authorization header =', `Bearer ${token}`);
+  
     });
 
   it('Deve cadastrar um livro com token JWT válido', async () => {
@@ -66,6 +62,6 @@ describe('📘 Testes de Cadastro de Livro com Autenticação', () => {
       .send(livroSemToken)
       .expect(401);
 
-    expect(res.body).to.have.property('error');
+   expect(res.body).to.have.property('error');
   });
 });

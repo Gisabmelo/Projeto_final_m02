@@ -2,7 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 const app = require('../src/app'); // Caminho para o app Express exportado
 
-describe('📘 Testes de Cadastro de Livro com Autenticação', () => {
+describe(' Testes de Cadastro de Livro com Autenticação', () => {
   let token;
 
   // Defina as credenciais de login do usuário de teste
@@ -32,9 +32,9 @@ describe('📘 Testes de Cadastro de Livro com Autenticação', () => {
 
   it('Deve cadastrar um livro com token JWT válido', async () => {
     const novoLivro = {
-      title: 'A Menina que Roubava Livros',
-      author: 'Markus Zusak',
-      quantity: 5
+    title: 'O Hobbit',          // changed from titulo
+    author: 'J.R.R. Tolkien',   // changed from autor
+    quantity: 2                 // changed from quantidade
     };
 
     const res = await request(app)

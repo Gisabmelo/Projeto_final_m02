@@ -26,7 +26,7 @@ describe ('Login',() => {
             expect(respostaLogin.body).to.have.property('token')
         })
 
-        it.only('Quando informo valores invalidos, tenho login mal sucedido com 401 UNAUTHORIZED', async () => {
+        it('Quando informo valores invalidos, tenho login mal sucedido com 401 UNAUTHORIZED', async () => {
             const respostaLogin = await request(app)
             .post('/api/auth/login')
             .send({

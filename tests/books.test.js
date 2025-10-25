@@ -5,28 +5,36 @@ const app = require('../src/app'); // Caminho para o app Express exportado
 describe('📘 Testes de Cadastro de Livro com Autenticação', () => {
   let token;
 
-  before(async () => {
-    // Registrar um leitor de teste (ignora conflito) e em seguida fazer login
-    const testUser = { name: 'testbookuser', password: 'pass123' };
+  // Defina as credenciais de login do usuário de teste
+  const postLogin = {
+    email: 'usuario@teste.com',
+    password: 'senha123'
+  };
 
-    // Tenta registrar; se já existir, ignora o erro
-    await request(app)
-      .post('/api/auth/register')
-      .send(testUser)
-      .then(() => {})
-      .catch(() => {});
+ //Testes
+    // Register user before testing login and get token
+    before(async () => {
+      const testUser = { name: postLogin.email, password: postLogin.password };
 
-    // Faz login e guarda o token JWT
-    const loginResponse = await request(app)
-      .post('/api/auth/login')
-      .send(testUser)
-      .expect(200);
+      // Try to register (ignore conflict)
+      await request(app).post('/api/auth/register').send(testUser).catch(() => {});
 
+      // Login
+      const loginResponse = await request(app).post('/api/auth/login').send(testUser);
+
+    // DEBUG: exibir corpo retornado pelo login para diagnóstico
+   // console.log('\n[DEBUG] loginResponse.status =', loginResponse.status);
+    //console.log('\n[DEBUG] loginResponse.body =', JSON.stringify(loginResponse.body));
+
+    expect(loginResponse.status).to.equal(200);
     expect(loginResponse.body).to.have.property('token');
     token = loginResponse.body.token;
-  });
+    // DEBUG: exibir token e cabeçalho que será enviado
+    //console.log('\n[DEBUG] token =', token);
+   // console.log('\n[DEBUG] Authorization header =', `Bearer ${token}`);
+    });
 
-  it.only('Deve cadastrar um livro com token JWT válido', async () => {
+  it('Deve cadastrar um livro com token JWT válido', async () => {
     const novoLivro = {
       title: 'A Menina que Roubava Livros',
       author: 'Markus Zusak',

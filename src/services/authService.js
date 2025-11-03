@@ -52,7 +52,7 @@ function verifyToken(token) {
   try {
     return jwt.verify(token, JWT_SECRET);
   } catch (e) {
-    const err = new Error('invalid token' + (e && e.message ? ': ' + e.message : ''));
+    const err = new Error('invalid token');
     err.status = 401;
     throw err;
   }

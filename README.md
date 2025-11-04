@@ -36,6 +36,8 @@ Swagger
 
 A documentação OpenAPI está em `resources/swagger.json` e a UI está disponível em `/docs`.
 
+http://localhost:3000/docs/#/
+
 Notas de implementação
 
 - Projeto usa armazenamento em memória (não persistente). Os dados são perdidos ao reiniciar.

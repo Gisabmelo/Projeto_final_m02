@@ -40,7 +40,7 @@ A documentação OpenAPI está em `resources/swagger.json` e a UI está disponí
 
 http://localhost:3000/docs/#/
 
-Notas de implementação
+Notas de implementação:
 
 - Projeto usa armazenamento em memória (não persistente). Os dados são perdidos ao reiniciar.
 - Autenticação é feita via JWT usando um segredo simples; para produção configure `JWT_SECRET`.

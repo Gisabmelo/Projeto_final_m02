@@ -23,6 +23,8 @@ npm install
 ```powershell
 npm start
 ```
+2. Para rodar os testes:
+npm  run test
 
 Endpoints principais (base `/api`):
 - `POST /api/auth/register` - registrar leitor

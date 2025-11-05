@@ -1,47 +1,68 @@
-# API de Troca de Livros
+📘 **Projeto de Testes de API – Mocha, Chai e Supertest**
 
-Projeto simples para gerenciar a troca de livros entre leitores.
+✅ 1. **Introdução**
 
-Principais funcionalidades:
-- Registrar leitor (nome, senha)
-- Login e autenticação via JWT
-- Registrar livros (título, autor, quantidade)
-- Buscar livros e ver quantidade disponível (requer autenticação)
-- Solicitar troca (reduz quantidade em 1) (requer autenticação)
-- Documentação Swagger disponível em `/docs`
+Este repositório contém testes automatizados para a API de Troca de Livros. Os testes foram desenvolvidos utilizando JavaScript com as bibliotecas Mocha, Chai e Supertest, com o objetivo de validar os principais endpoints da aplicação e garantir a qualidade e funcionamento correto das funcionalidades implementadas.
 
-Como executar
+🛠 2. Tecnologias Utilizadas
 
-1. Instalar dependências:
+- **JavaScript**
+- **Mocha** (framework de testes)
+- **Chai** (biblioteca de asserções)
+- **Supertest** (requisições HTTP para testes de API)
+- **Node.js**
+- **npm** (gerenciador de pacotes)
 
-```powershell
+📂 3. **Estrutura do Repositório**
+```
+Projeto_final_m02/
+├── src/
+│   └── app.js                  # Arquivo principal da API
+├── tests/
+│   ├── login.test.js           # Testes de autenticação e login
+│   ├── books.test.js           # Testes de cadastro de livros
+│   └── SearchBooks.test.js     # Testes de Busca de livros
+    ├── booksExchange.test.js   # Testes de troca de livros
+│   ├── GetBookByid.test.js     # Testes de Busca de livros pelo ID
+
+├── package.json                # Dependências e scripts do projeto
+└── README.md                   # Documentação do repositório
+```
+
+
+⚙ 5. **Instalação do Projeto**
+
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/Gisabmelo/Projeto_final_m02
+cd Projeto_final_m02
+```
+
+### 2. Instalar dependências
+```bash
 npm install
 ```
 
-2. Iniciar servidor:
-
-```powershell
-npm start
+### 3. Executar a API (se necessário)
+```bash
+node src/app.js
 ```
-2. Para rodar os testes:
-npm  run test
+Ou com Nodemon:
+```bash
+npm run dev
+```
 
-Endpoints principais (base `/api`):
-- `POST /api/auth/register` - registrar leitor
-- `POST /api/auth/login` - fazer login e receber token JWT
-- `POST /api/books` - registrar livro (requer Authorization: Bearer <token>)
-- `GET /api/books` - buscar livros (requer token)
-- `GET /api/books/{id}` - obter livro por id (requer token)
-- `POST /api/books/{id}/exchange` - solicitar troca (requer token)
+### 4. Executar os testes com Mocha
+```bash
+npx mocha tests/**/*.test.js --exit
+```
 
-Swagger
+---
 
-A documentação OpenAPI está em `resources/swagger.json` e a UI está disponível em `/docs`.
+Se desejar visualizar os resultados com maior detalhamento, você pode adicionar o modo de relatório:
+```bash
+npx mocha tests/**/*.test.js --reporter spec --exit
+```
 
-http://localhost:3000/docs/#/
+---
 
-Notas de implementação:
-
-- Projeto usa armazenamento em memória (não persistente). Os dados são perdidos ao reiniciar.
-- Autenticação é feita via JWT usando um segredo simples; para produção configure `JWT_SECRET`.
-- Estrutura em camadas: routes, controllers, services, models, db, middleware.

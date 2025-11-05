@@ -31,7 +31,7 @@ jobs:
           echo "Variáveis de ambiente carregadas"
 
       - name: 🧪 Executar testes
-        run: npm run test
+        run: npx mocha tests/**/*.test.js --exit
         # ou, se usar Mocha diretamente:
         # run: npx mocha tests/**/*.test.js --exit
 
